@@ -1,0 +1,49 @@
+%div{:ng => {:controller => 'PhilosophersCtrl as philCtrl'}}
+  #table{:ng => {:controller => 'SticksCtrl as sticksCtrl'}}
+    %div{:ng => {:repeat => 'philosopher in philCtrl.philosophers()'}}
+      %philosopher
+      %plate
+    %div{:ng => {:repeat => 'stick in sticksCtrl.sticks()'}}
+      %stick
+
+- content_for :sidebar do
+  #sidebar{:ng => {:controller => 'PhilosophersCtrl as philCtrl'}}
+    %uib-alert{:ng => {:repeat => 'alert in alertsCtrl.alerts()'},
+               :type => '{{ alert.type }}',
+               :close => 'alertsCtrl.close($index)',
+               'dismiss-on-timeout' => '5000'}
+      {{ alert.message }}
+
+    %div{:ng => {:controller => 'SticksCtrl as sticksCtrl'}}
+      %div{:ng => {:hide => 'philCtrl.currentPhilosopher()'}}
+        %input.form-control{:type => 'text', :ng => {:model => 'philCtrl.newPhilosopherName'}}
+        %a.btn.btn-default.btn-block{:href => '#', :ng => {:href => '#', :click => 'philCtrl.participate()'}}
+          Participate as {{ philCtrl.newPhilosopherName }}
+
+      .text-center
+        %leave-button{:ng => {:show => 'philCtrl.currentPhilosopher()'}}
+
+      %div{:ng => {:show => 'philCtrl.currentPhilosopher()'}}
+        .row
+          .col-sm-10.col-sm-offset-1
+            .text-center
+              .phil-image
+                %img.img-rounded{:ng => {:src => '{{ philCtrl.currentPhilosopher().avatar_url }}'}}
+                .ribbon
+                  .ribbon-content
+                    {{ philCtrl.currentPhilosopher().name }}
+
+        .row
+          .col-sm-12
+            .text-center{:ng => {:show => 'sticksCtrl.sticks().length > 1'}}
+              %stick-button{:position => 'left'}
+              %commit-button
+              %stick-button{:position => 'right'}
+
+        .row{:style => 'margin-top: 20px;'}
+          .col-sm-12
+            %think-button
+
+
+- content_for :philosophers_list do
+  %philosophers-list

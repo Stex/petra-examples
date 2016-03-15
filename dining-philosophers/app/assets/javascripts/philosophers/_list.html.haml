@@ -1,0 +1,8 @@
+.row{:ng => {:controller => 'ThoughtsController as thoughtsCtrl'}}
+  .col-sm-10.col-sm-offset-1
+    .phil-image{:ng => {:repeat => 'philosopher in philCtrl.philosophers()'}}
+      %img.img-rounded{:ng => {:src => '{{ philosopher.avatar_url }}'}, :id => 'philosopher_{{ philosopher.number }}'}
+      .ribbon
+        .ribbon-content
+          {{ philosopher.name }}
+

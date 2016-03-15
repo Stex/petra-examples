@@ -1,0 +1,17 @@
+!!!
+%html{:ng => {:app => 'philosophers'}}
+  %head
+    %title The interactive dining philosophers
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body
+    .container-fluid
+      .row
+        .col-lg-2.col-md-6
+          = yield :philosophers_list
+        .col-lg-8.hidden-md.hidden-sm.hidden-xs
+          #content= yield
+        .col-lg-2.col-md-6{:ng => {:controller => 'AlertsController as alertsCtrl'}}
+          = yield :sidebar
+      .clearfix

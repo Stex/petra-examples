@@ -1,0 +1,72 @@
+@import 'breakpoint';
+
+$table-sizes: 300px 400px 600px;
+$media-breakpoints: (0px 800px) (801px 1400px) (1401px);
+
+@each $media in $media-breakpoints {
+  @include breakpoint($media) {
+    $i: index($media-breakpoints, $media);
+    $table-size: nth($table-sizes, $i);
+
+    #content {
+      padding-top: $table-size / 4 ;
+      padding-bottom: $table-size / 4 ;
+      border-right: 1px solid gray;
+      border-left: 1px solid gray;
+    }
+
+    #table {
+      position: relative;
+      background-image: image_url('table.png');
+      background-size: cover;
+      background-position: center;
+      width: $table-size ;
+      height: $table-size ;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .plate {
+      position: absolute;
+      background-image: image_url('plate.png');
+      width: $table-size / 5 ;
+      height: $table-size / 5 ;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .philosopher {
+      text-align: center;
+      position: absolute;
+      width: $table-size / 4 ;
+      height: $table-size / 4 ;
+
+      img {
+        width: 95%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .stick {
+      position: absolute;
+      background-image: image_url('wood.jpg');
+      width: $table-size / 7 ;
+      height: 8px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 5px;
+
+      &.vertical {
+        position: inherit;
+        width: 8px;
+      }
+
+      //-webkit-box-shadow: 6px 6px 5px -1px rgba(0,0,0,0.75);
+      //-moz-box-shadow: 6px 6px 5px -1px rgba(0,0,0,0.75);
+      //box-shadow: 6px 6px 5px -1px rgba(0,0,0,0.75);
+    }
+  }
+}
