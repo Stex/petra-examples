@@ -54,15 +54,9 @@ class SticksController < ApplicationController
   #
   def commit
     petra_transaction do
-      if [current_philosopher.left_stick, current_philosopher.right_stick].all? { |s| stick_taken_by_current?(s) }
-        Petra.commit!
-      elsif [current_philosopher.left_stick, current_philosopher.right_stick].none? { |s| stick_taken_by_current?(s) }
-        Petra.commit!
-      else
-        render_api_error :bad_request, 'not_both_sticks_taken', 'You have to handle both sticks at once!'
-        return
-      end
+      Petra.commit!
     end
+
     render :json => {:status => :success}
   end
 

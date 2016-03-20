@@ -2,9 +2,6 @@ class PhilosophersController < ApplicationController
   use_petra_transaction :only => :show
   before_action :ensure_current_philosopher, :only => [:show, :think]
 
-  # TODO: may not start until there are enough philosophers
-  # TODO: Use/Generate the correct amount of sticks dynamically
-  # TODO: Statt "take_stick" eher "Plan to take stick" und "execute plan!" als commit.
   def index
     respond_to do |format|
       format.html
